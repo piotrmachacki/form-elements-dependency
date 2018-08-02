@@ -1,0 +1,43 @@
+{
+  "name": "form-elements-dependency",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/form-elements-dependency.js",
+  "files": [
+    "dist/",
+    "src/form-elements-dependency.js"
+  ],
+  "author": "Piotr Machacki",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/piotrmachacki/form-elements-dependency.git"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
+  "peerDependencies": {
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.6.1",
+    "babelrc-rollup": "^3.0.0",
+    "live-server": "^1.2.0",
+    "nodemon": "^1.17.3",
+    "npm-run-all": "^4.1.2",
+    "rollup": "^0.58.2",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "uglify-js": "^3.3.22"
+  },
+  "scripts": {
+    "dist": "npm run compile && npm run minify",
+    "compile": "rollup --config rollup.config.js --file dist/form-elements-dependency.js src/form-elements-dependency.js",
+    "minify": "uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --source-map \"content=dist/form-elements-dependency.js.map,includeSources,url=form-elements-dependency.min.js.map\" --output dist/form-elements-dependency.min.js dist/form-elements-dependency.js",
+    "server": "live-server --watch=dist,example --open=example",
+    "start": "npm run compile && npm-run-all --parallel watch server",
+    "watch": "nodemon --watch src --ext js --exec \"npm run compile\""
+  }
+}
